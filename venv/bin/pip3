@@ -1,4 +1,6 @@
-#!/Users/shobhittyagi/Expense-Tracker/venv/bin/python3
+#!/bin/sh
+'''exec' "/Users/harshita_tanwar/Downloads/Expense-Tracker 4/venv/bin/python3" "$0" "$@"
+' '''
 # -*- coding: utf-8 -*-
 import re
 import sys

@@ -3,13 +3,13 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Reports | Team Expense Tracker</title>
+  <title>Reports | SpendWise</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <link href="{% static 'css/tailwind.min.css' %}" rel="stylesheet" />
+  <script src="{% static 'js/chart.min.js' %}"></script>
   <link rel="stylesheet" href="{% static 'css/chart-fixes.css' %}">
 </head>
-<body class="bg-gray-100 min-h-screen font-sans">
+<body class="bg-gray-200 min-h-screen font-sans">
 
   <!-- Navbar -->
   <nav class="bg-white shadow-md p-4 px-6 flex justify-between items-center text-black">
@@ -18,7 +18,7 @@
         <path d="M9 17v-2a4 4 0 014-4h5a4 4 0 014 4v2"></path>
         <path d="M3 7a4 4 0 014-4h10a4 4 0 014 4v10a4 4 0 01-4 4H7a4 4 0 01-4-4V7z"></path>
       </svg>
-      <span class="text-xl font-bold tracking-wide">Team Expense Tracker</span>
+      <span class="text-xl font-bold tracking-wide">SpendWise</span>
     </div>
     <div class="flex items-center space-x-6">
       <span class="font-medium">👤 {{ request.user.username }}</span>
