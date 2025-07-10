@@ -110,3 +110,8 @@ MEDIA_ROOT = BASE_DIR / 'media'
 USE_X_FORWARDED_HOST = False
 USE_X_FORWARDED_PORT = False
 
+STATIC_ROOT = BASE_DIR / 'staticfiles'
+import os
+
+if os.environ.get('RENDER'):
+    DEBUG = False
