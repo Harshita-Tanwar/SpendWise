@@ -17,6 +17,7 @@ et_xmlfile==2.0.0
 exceptiongroup==1.2.2
 filelock==3.16.1
 fonttools==4.56.0
+gunicorn==23.0.0
 h11==0.14.0
 idna==3.10
 importlib_resources==6.4.5
@@ -69,4 +70,3 @@ webdriver-manager==4.0.2
 websocket-client==1.8.0
 wsproto==1.2.0
 zipp==3.20.2
-gunicorn
