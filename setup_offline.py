@@ -86,7 +86,7 @@ def main():
     try:
         django.setup()
         print("=" * 60)
-        print("🔧 Expense Tracker - Offline Setup")
+        print("🔧 SpendWise - Offline Setup")
         print("=" * 60)
         
         # Run setup steps

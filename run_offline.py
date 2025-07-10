@@ -16,7 +16,7 @@ def main():
     try:
         django.setup()
         print("=" * 60)
-        print("🚀 Expense Tracker - Offline Mode")
+        print("🚀 SpendWise - Offline Mode")
         print("=" * 60)
         print("📱 Access the application at: http://127.0.0.1:8000")
         print("🔧 Admin panel at: http://127.0.0.1:8000/admin")

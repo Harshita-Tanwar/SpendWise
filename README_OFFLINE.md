@@ -1,4 +1,4 @@
-# Expense Tracker - Offline Version
+# SpendWise - Offline Version
 
 A complete offline-capable expense tracking application built with Django.
 

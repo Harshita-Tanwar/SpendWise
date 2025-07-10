@@ -1,4 +1,4 @@
-# Expense Tracker with Charts and Graphs
+# SpendWise with Charts and Graphs
 
 A Django-based expense tracking application with dynamic charts and graphs that connect to the backend data.
 
