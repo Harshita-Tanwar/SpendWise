@@ -134,4 +134,4 @@ Tracker/
 - Interactive tooltips with detailed information
 - Chart animations and transitions
 - Real-time WebSocket updates
-- Chart customization options 
+- Chart customization options # SpendWise
