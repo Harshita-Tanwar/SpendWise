@@ -113,5 +113,5 @@ USE_X_FORWARDED_PORT = False
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 import os
 
-if os.environ.get('RENDER'):
-    DEBUG = False
+if os.environ.get('RENDER') == 'true':
+    STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
