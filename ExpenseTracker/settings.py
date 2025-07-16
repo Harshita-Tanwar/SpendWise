@@ -110,8 +110,13 @@ MEDIA_ROOT = BASE_DIR / 'media'
 USE_X_FORWARDED_HOST = False
 USE_X_FORWARDED_PORT = False
 
-STATIC_ROOT = BASE_DIR / 'staticfiles'
-import os
+import os 
 
-if os.environ.get('RENDER') == 'true':
-    STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATICFILES_DIRS =[os.path.join(BASE_DIR, )]
+STATIC_URL = '/static/'
+
+MIDDLEWARE = [
+    "whitenoise.middleware.WhiteNoiseMiddleware",  # after SecurityMiddleware
+    ...
+]
