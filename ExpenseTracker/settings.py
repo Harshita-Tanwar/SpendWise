@@ -1,19 +1,23 @@
 from pathlib import Path
+import os
+import dj_database_url
 
-# Base directory
+# --- Base directory ---
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-d*#8-=^lt1n3&kw01s0657g0z1+2pgy8@(np6-!ad#8@8h(mgz'
+# --- Secret Key ---
+SECRET_KEY = os.getenv('SECRET_KEY', 'django-insecure-d*#8-=^lt1n3&kw01s0657g0z1+2pgy8@(np6-!ad#8@8h(mgz')
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+# --- Debug ---
+DEBUG = os.getenv('DEBUG', 'True') == 'True'
 
-# Allow all hosts for offline development
-ALLOWED_HOSTS = ['*']
+# --- Allowed Hosts ---
+ALLOWED_HOSTS = ['ets-production-c3dc.up.railway.app']
 
+# --- Custom User Model ---
 AUTH_USER_MODEL = 'Tracker.CustomUser'
-# Application definition
+
+# --- Installed Apps ---
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -21,9 +25,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'Tracker',  # your app
+    'Tracker',
 ]
 
+# --- Middleware ---
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -34,8 +39,10 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+# --- URL configuration ---
 ROOT_URLCONF = 'ExpenseTracker.urls'
 
+# --- Templates ---
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -52,17 +59,15 @@ TEMPLATES = [
     },
 ]
 
+# --- WSGI Application ---
 WSGI_APPLICATION = 'ExpenseTracker.wsgi.application'
 
-# Database (SQLite for offline development)
+# --- Database ---
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+    'default': dj_database_url.config(default='sqlite:///db.sqlite3', conn_max_age=600)
 }
 
-# Password validation
+# --- Password Validation ---
 AUTH_PASSWORD_VALIDATORS = [
     {'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator'},
     {'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator'},
@@ -70,53 +75,38 @@ AUTH_PASSWORD_VALIDATORS = [
     {'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator'},
 ]
 
-# Internationalization
+# --- Internationalization ---
 LANGUAGE_CODE = 'en-us'
-TIME_ZONE = 'UTC'  # Changed to UTC for better offline compatibility
+TIME_ZONE = 'UTC'
 USE_I18N = True
 USE_TZ = True
 
-# Static files
+# --- Static Files ---
 STATIC_URL = '/static/'
-STATICFILES_DIRS = [
-    BASE_DIR / 'Tracker' / 'static',
-]
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
-# Default primary key field type
-DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+# --- Media Files ---
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media'
 
-# Authentication redirect URLs
+# --- Auth Redirects ---
 LOGIN_URL = '/'
 LOGIN_REDIRECT_URL = '/dashboard/'
 LOGOUT_REDIRECT_URL = '/'
 
-# Session Settings (Session-based Auth) - Optimized for offline use
-SESSION_COOKIE_SECURE = False  # Set True in production (HTTPS)
+# --- Sessions ---
 SESSION_COOKIE_HTTPONLY = True
-SESSION_EXPIRE_AT_BROWSER_CLOSE = False  # Changed to False for offline convenience
-SESSION_COOKIE_AGE = 86400  # 24 hours session expiry for offline use
+SESSION_EXPIRE_AT_BROWSER_CLOSE = False
+SESSION_COOKIE_AGE = 86400  # 1 day
 
-# CSRF Protection
-CSRF_COOKIE_SECURE = False  # Set True in production (HTTPS)
+# ✅ Important for Railway Deployment ---
+# Railway handles HTTPS at the proxy level
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = True
+SECURE_SSL_REDIRECT = False  # avoid redirect loop on Railway
 
-# HTTPS settings (Disable for offline development)
-SECURE_SSL_REDIRECT = False  # Set True in production
+# ✅ CSRF Trusted Origins ---
+CSRF_TRUSTED_ORIGINS = ['https://ets-production-c3dc.up.railway.app']
 
-# Media files
-MEDIA_URL = '/media/'
-MEDIA_ROOT = BASE_DIR / 'media'
-
-# Offline-specific settings
-USE_X_FORWARDED_HOST = False
-USE_X_FORWARDED_PORT = False
-
-import os 
-
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-STATICFILES_DIRS =[os.path.join(BASE_DIR, )]
-STATIC_URL = '/static/'
-
-MIDDLEWARE = [
-    "whitenoise.middleware.WhiteNoiseMiddleware",  # after SecurityMiddleware
-    ...
-]
+# --- Default Auto Field ---
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
